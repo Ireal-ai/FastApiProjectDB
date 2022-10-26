@@ -1,0 +1,4 @@
+pydantic~=1.10.2
+psycopg2~=2.9.5
+SQLAlchemy~=1.4.42
+timestamp~=0.0.1
