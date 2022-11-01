@@ -1,26 +1,28 @@
-from sqlalchemy import Integer, String, Column, Table, MetaData, ForeignKey, select, create_engine, TIMESTAMP
-
-meta = MetaData()
-
-documents_model = Table('documents', meta,
-                        Column('id', Integer, primary_key=True, autoincrement=True),
-                        Column('name', String),
-                        Column('text', String),
-                        Column('inserted_at', TIMESTAMP),
-                        Column('updated_at', TIMESTAMP)
-                        )
-
-rights_model = Table('rights', meta,
-                     Column('id', Integer, primary_key=True, autoincrement=True),
-                     Column('document_id', Integer, ForeignKey('documents.id')),
-                     Column('name', String),
-                     Column('text', String),
-                     Column('right_from', TIMESTAMP),
-                     Column('rights_to', TIMESTAMP),
-                     Column('inserted_at', TIMESTAMP),
-                     Column('updated_at', TIMESTAMP)
-                     )
+from sqlalchemy import Integer, String, Column, ForeignKey, TIMESTAMP
+from sqlalchemy.orm import relationship
+from connections.connect_module import Base
 
 
+class DocumentsModel(Base):
+    __tablename__ = 'documents'
+
+    id = Column('id', Integer, primary_key=True, autoincrement=True),
+    right = relationship('RightsModel', back_populates='document')
+    name = Column('name', String),
+    text = Column('text', String),
+    inserted_at = Column('inserted_at', TIMESTAMP),
+    updated_at = Column('updated_at', TIMESTAMP)
 
 
+class RightsModel(Base):
+    __tablename__ = 'rights'
+
+    id = Column('id', Integer, primary_key=True, autoincrement=True),
+    document_id = Column('document_id', Integer, ForeignKey('documents.id')),
+    name = Column('name', String),
+    text = Column('text', String),
+    rights_from = Column('right_from', TIMESTAMP),
+    rights_to = Column('rights_to', TIMESTAMP),
+    inserted_at = Column('inserted_at', TIMESTAMP),
+    updated_at = Column('updated_at', TIMESTAMP)
+    document = relationship("DocumentsModel", back_populates='right')
