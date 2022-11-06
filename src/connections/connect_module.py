@@ -1,16 +1,13 @@
 import psycopg2
 from psycopg2 import Error
-from sqlalchemy import create_engine, select, insert, update, delete
+from sqlalchemy import select, insert, update, delete
 from sqlalchemy.orm import declarative_base, sessionmaker
-
 import os
+from settings import Settings
 
-from settings import DATABASE_URL
+settings = Settings()
 
-engine = DATABASE_URL
+engine = settings.DATABASE_URL
 Session = sessionmaker(engine)
 Base = declarative_base()
 
-
-def create_database():
-    Base.metadata.create_all(engine)
