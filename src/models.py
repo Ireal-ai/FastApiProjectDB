@@ -1,6 +1,6 @@
 from sqlalchemy import Integer, String, Column, ForeignKey, TIMESTAMP
 from sqlalchemy.orm import relationship
-from connections.connect_module import Base
+from connections.connect_db import Base
 
 
 class DocumentsModel(Base):

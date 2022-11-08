@@ -15,9 +15,7 @@ class Settings(BaseSettings):
     DATABASE_PORT: str = os.getenv(str('db_port'))
     DATABASE_HOST: str = os.getenv('db_host')
     DATABASE_URL: str = f'postgresql+psycopg2://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}:{DATABASE_PORT}/' \
-                        f'{DATABASE_NAME}'.format(DATABASE_USER=DATABASE_USER, DATABASE_PASSWORD=DATABASE_PASSWORD,
-                                                  DATABASE_HOST=DATABASE_HOST, DATABASE_PORT=DATABASE_PORT,
-                                                  DATABASE_NAME=DATABASE_NAME)
+                        f'{DATABASE_NAME}'
 
     class Config:
         env_file = '.env'
