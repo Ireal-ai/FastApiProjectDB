@@ -1,10 +1,9 @@
 from sqlalchemy import Integer, String, Column, ForeignKey, TIMESTAMP
 from sqlalchemy.orm import relationship
-from src.connections.connect_db import BaseConnect
+from src.connections.connect_db import Base
 
 
-
-class RightsModel(BaseConnect):
+class RightsModel(Base):
     __tablename__ = 'rights'
 
     id = Column('id', Integer, primary_key=True, autoincrement=True),
