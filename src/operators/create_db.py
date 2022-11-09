@@ -1,22 +1,22 @@
-from sqlalchemy import select, insert, update, delete
-
 from src.connections import base_connect
-from src.models import DocumentsModel
+from src.models.documents_model import DocumentsModel
 
 
 class CreateDb:
     def __init__(self):
         self.documents_model = DocumentsModel.__table__
 
+    def processing(self):
+        self.documents_model.create()
+
     def execute(self):
         self.pg_session = base_connect.get_session()
         try:
-            # processing()
+            create_process = self.processing
             pass
         except Exception as error:
             return error
         finally:
             self.pg_session.close()
 
-    def processing(self):
-        self.documents_model.create()
+

@@ -1,9 +1,9 @@
 from sqlalchemy import Integer, String, Column, ForeignKey, TIMESTAMP
 from sqlalchemy.orm import relationship
-from connections.connect_db import Base
+from src.connections.connect_db import BaseConnect
 
 
-class DocumentsModel(Base):
+class DocumentsModel(BaseConnect):
     __tablename__ = 'documents'
 
     id = Column('id', Integer, primary_key=True, autoincrement=True),
@@ -14,7 +14,7 @@ class DocumentsModel(Base):
     updated_at = Column('updated_at', TIMESTAMP)
 
 
-class RightsModel(Base):
+class RightsModel(BaseConnect):
     __tablename__ = 'rights'
 
     id = Column('id', Integer, primary_key=True, autoincrement=True),
