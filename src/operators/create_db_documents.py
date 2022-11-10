@@ -2,7 +2,7 @@ from src.connections import base_connect
 from src.models.documents_model import DocumentsModel
 
 
-class CreateDb:
+class CreateDocumentTable:
     def __init__(self):
         self.documents_model = DocumentsModel.__table__
 
@@ -15,7 +15,7 @@ class CreateDb:
             self.processing()
             self.pg_session.commit()
         except Exception as error:
-            return error
+            raise error
         finally:
 
             self.pg_session.close()

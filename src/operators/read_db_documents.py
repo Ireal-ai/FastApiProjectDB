@@ -2,7 +2,7 @@ from src.models.documents_model import DocumentsModel
 from src.connections import base_connect
 
 
-class ReadDocumentModel:
+class ReadDocumentTable:
     def __init__(self):
         self.document_model = DocumentsModel.__table__
 
@@ -15,7 +15,7 @@ class ReadDocumentModel:
             self.processing()
             self.pg_session.commit()
         except Exception as error:
-            return error
+            raise error
         finally:
             self.pg_session.close()
 

@@ -1,13 +1,13 @@
-from src.models.rights_model import RightsModel
 from src.connections import base_connect
+from src.models.documents_model import DocumentsModel
 
 
-class ReadRightsTable:
+class DropDocumentsTable:
     def __init__(self):
-        self.rights_model = RightsModel.__table__
+        self.document_model = DocumentsModel.__table__
 
     def processing(self):
-        self.rights_model.select()
+        self.document_model.drop()
 
     def execute(self):
         self.pg_session = base_connect.get_session()
@@ -18,3 +18,4 @@ class ReadRightsTable:
             raise error
         finally:
             self.pg_session.close()
+

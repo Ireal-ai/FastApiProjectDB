@@ -2,7 +2,7 @@ from src.connections import base_connect
 from src.models.rights_model import RightsModel
 
 
-class CreateDb:
+class CreateRightsTable:
     def __init__(self):
         self.rights_model = RightsModel.__table__
 
@@ -15,7 +15,7 @@ class CreateDb:
             self.processing()
             self.pg_session.commit()
         except Exception as error:
-            return error
+            raise error
         finally:
 
             self.pg_session.close()
