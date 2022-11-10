@@ -1,13 +1,13 @@
+from src.models.documents_model import DocumentsModel
 from src.connections import base_connect
-from src.models.rights_model import RightsModel
 
 
-class CreateDb:
+class ReadDocumentModel:
     def __init__(self):
-        self.rights_model = RightsModel.__table__
+        self.document_model = DocumentsModel.__table__
 
     def processing(self):
-        self.rights_model.create()
+        self.document_model.select()
 
     def execute(self):
         self.pg_session = base_connect.get_session()
@@ -17,5 +17,6 @@ class CreateDb:
         except Exception as error:
             return error
         finally:
-
             self.pg_session.close()
+
+

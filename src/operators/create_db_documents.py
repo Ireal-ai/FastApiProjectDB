@@ -14,7 +14,6 @@ class CreateDb:
         try:
             self.processing()
             self.pg_session.commit()
-            pass
         except Exception as error:
             return error
         finally:
