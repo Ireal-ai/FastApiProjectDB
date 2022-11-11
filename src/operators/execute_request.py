@@ -1,13 +1,9 @@
-from src.models.rights_model import RightsModel
 from src.connections import base_connect
 
 
-class ReadRightsTable:
-    def __init__(self):
-        self.rights_model = RightsModel.__table__
-
+class Execute_requests:
     def processing(self):
-        self.rights_model.select()
+        pass
 
     def execute(self):
         self.pg_session = base_connect.get_session()
