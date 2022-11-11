@@ -9,6 +9,9 @@ class CreateDocumentTable(Execute_requests):
     def processing(self):
         self.documents_model.create()
 
+    def execute(self):
+        return super(CreateDocumentTable, self).execute()
+
 
 
 

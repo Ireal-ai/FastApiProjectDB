@@ -9,4 +9,5 @@ class CreateRightsTable(Execute_requests):
     def processing(self):
         self.rights_model.create()
 
-
+    def execute(self):
+        return super(CreateRightsTable, self).execute()

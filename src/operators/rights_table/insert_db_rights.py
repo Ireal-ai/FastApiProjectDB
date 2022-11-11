@@ -9,5 +9,6 @@ class InsertRightModel(Execute_requests):
     def processing(self):
         self.right_model.insert()
 
-
+    def execute(self):
+        return super(InsertRightModel, self).execute()
 

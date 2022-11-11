@@ -9,5 +9,6 @@ class DropDocumentsTable(Execute_requests):
     def processing(self):
         self.document_model.drop()
 
-
+    def execute(self):
+        return super(DropDocumentsTable, self).execute()
 

@@ -9,6 +9,9 @@ class ReadDocumentTable(Execute_requests):
     def processing(self):
         self.document_model.select()
 
+    def execute(self):
+        return super(ReadDocumentTable, self).execute()
+
 
 
 

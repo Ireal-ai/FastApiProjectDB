@@ -8,3 +8,6 @@ class DropRightsTable(Execute_requests):
 
     def processing(self):
         self.rights_model.drop()
+
+    def execute(self):
+        return super(DropRightsTable, self).execute()

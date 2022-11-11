@@ -9,4 +9,5 @@ class InsertDocumentTable(Execute_requests):
     def processing(self):
         self.document_model.insert()
 
-
+    def execute(self):
+        return super(InsertDocumentTable, self).execute()

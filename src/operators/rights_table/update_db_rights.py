@@ -9,3 +9,5 @@ class UpdateDocumentsTable(Execute_requests):
     def processing(self):
         self.rights_model.update()
 
+    def execute(self):
+        return super(UpdateDocumentsTable, self).execute()

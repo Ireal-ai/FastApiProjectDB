@@ -8,3 +8,6 @@ class ReadRightsTable(Execute_requests):
 
     def processing(self):
         self.rights_model.select()
+
+    def execute(self):
+        return super(ReadRightsTable, self).execute()
