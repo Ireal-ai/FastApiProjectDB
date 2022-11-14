@@ -2,36 +2,33 @@ import logging
 
 from fastapi import APIRouter, BackgroundTasks
 
-from src.operators.documents_table import (create_db_documents,
-                                           drop_db_documents,
-                                           insert_db_documents,
-                                           read_db_documents,
-                                           update_db_documents)
+from src.operators.documents_table import *
+
 
 documents_router = APIRouter()
 
 
-@documents_router.post('/create/documents')
+@documents_router.post('/documents/create')
 async def create_documents_table():
-    create_db_documents.CreateDocumentTable.execute()
+    create_doc_table.execute()
     return 'База данных документов успешно создана'
 
 
 @documents_router.post('/document/add')
 async def add_document():
-    insert_db_documents.InsertDocumentTable.execute()
+    ins_doc_table.execute()
     return 'Документ усмешно добавлен'
 
 
 @documents_router.put('/document/update')
 async def update_document():
-    update_db_documents.UpdateDocumentsTable.execute()
+    update_doc_table.execute()
     return 'Документ успешно обновлён'
 
 
 @documents_router.delete('/document/delete')
 async def delete_document():
-    drop_db_documents.DropDocumentsTable.execute()
+    drop_doc_table.execute()
     return 'Документ успешно удалён'
 
 
@@ -43,5 +40,5 @@ async def get_document():
 
 @documents_router.get('/document')
 async def get_all_documents():
-    read_db_documents.ReadDocumentTable.execute()
+    read_doc_table.execute()
     return 'Документы предоставлены для чтения'
