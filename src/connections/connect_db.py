@@ -1,14 +1,13 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy.orm import declarative_base, Session
 from config import settings
 
-Base = declarative_base()
+
+engine = create_engine(settings.DB_URL)
+Base = declarative_base(engine)
+metadata = MetaData(engine)
+metadata.drop_all()
 
 
-class BaseConnect:
-
-    def __init__(self):
-        self.engine = create_engine(settings.DATABASE_URL)
-
-    def get_session(self):
-        return sessionmaker(self.engine)
+def get_session():
+    return Session(engine)

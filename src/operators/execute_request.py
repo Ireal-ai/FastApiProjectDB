@@ -1,9 +1,13 @@
+from abc import abstractmethod, ABC
+
 from src.connections import base_connect
 
 
-class Execute_requests:
+class Execute_requests(ABC):
+
+    @abstractmethod
     def processing(self):
-        pass
+        ...
 
     def execute(self):
         self.pg_session = base_connect.get_session()

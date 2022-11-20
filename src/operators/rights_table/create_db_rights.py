@@ -1,12 +1,21 @@
-from src.operators.execute_request import Execute_requests
+from src.connections import get_session
 from src.models.rights_model import RightsModel
 
 
-class CreateRightsTable(Execute_requests):
+class CreateRightsTable:
     def __init__(self):
         self.rights_model = RightsModel.__table__
 
     def processing(self):
         self.rights_model.create()
 
+    def execute(self):
+        self.pg_session = get_session()
+        try:
+            self.processing()
+            self.pg_session.commit()
+        except Exception as error:
+            raise error
+        finally:
+            self.pg_session.close()
 
