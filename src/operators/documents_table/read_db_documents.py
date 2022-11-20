@@ -1,8 +1,8 @@
+from src.connections import get_session
 from src.models.documents_model import DocumentsModel
-from src.operators.execute_request import Execute_requests
 
 
-class ReadDocumentTable(Execute_requests):
+class ReadDocumentTable:
     def __init__(self):
         self.document_model = DocumentsModel.__table__
 
@@ -10,8 +10,11 @@ class ReadDocumentTable(Execute_requests):
         self.document_model.select()
 
     def execute(self):
-        return super(ReadDocumentTable, self).execute()
-
-
-
-
+        self.pg_session = get_session()
+        try:
+            self.processing()
+            self.pg_session.commit()
+        except Exception as error:
+            raise error
+        finally:
+            self.pg_session.close()

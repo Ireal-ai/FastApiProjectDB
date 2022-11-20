@@ -1,7 +1,13 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy.orm import declarative_base, Session
 from config import settings
 
-Base = declarative_base()
+
 engine = create_engine(settings.DB_URL)
-session = sessionmaker(engine)
+Base = declarative_base(engine)
+metadata = MetaData(engine)
+metadata.drop_all()
+
+
+def get_session():
+    return Session(engine)

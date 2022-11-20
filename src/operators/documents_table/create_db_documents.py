@@ -1,8 +1,8 @@
-from src.operators.execute_request import Execute_requests
+from src.connections import get_session
 from src.models.documents_model import DocumentsModel
 
 
-class CreateDocumentTable(Execute_requests):
+class CreateDocumentTable:
     def __init__(self):
         self.documents_model = DocumentsModel.__table__
 
@@ -10,7 +10,15 @@ class CreateDocumentTable(Execute_requests):
         self.documents_model.create()
 
     def execute(self):
-        return super(CreateDocumentTable, self).execute()
+        self.pg_session = get_session()
+        try:
+            self.processing()
+            self.pg_session.commit()
+        except Exception as error:
+            raise error
+        finally:
+            self.pg_session.close()
+
 
 
 

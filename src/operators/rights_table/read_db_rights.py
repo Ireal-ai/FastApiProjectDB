@@ -1,8 +1,8 @@
+from src.connections import get_session
 from src.models.rights_model import RightsModel
-from src.operators.execute_request import Execute_requests
 
 
-class ReadRightsTable(Execute_requests):
+class ReadRightsTable:
     def __init__(self):
         self.rights_model = RightsModel.__table__
 
@@ -10,4 +10,11 @@ class ReadRightsTable(Execute_requests):
         self.rights_model.select()
 
     def execute(self):
-        return super(ReadRightsTable, self).execute()
+        self.pg_session = get_session()
+        try:
+            self.processing()
+            self.pg_session.commit()
+        except Exception as error:
+            raise error
+        finally:
+            self.pg_session.close()

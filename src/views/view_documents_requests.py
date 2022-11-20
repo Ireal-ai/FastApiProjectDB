@@ -1,11 +1,12 @@
-import logging
-
-from fastapi import APIRouter, BackgroundTasks
-
+from fastapi import APIRouter
 from src.operators.documents_table import *
 
-
 documents_router = APIRouter()
+
+
+@documents_router.get('/')
+async def root():
+    return 'Сервис для документов и прав'
 
 
 @documents_router.post('/documents/create')
@@ -26,7 +27,7 @@ async def update_document():
     return 'Документ успешно обновлён'
 
 
-@documents_router.delete('/document/delete')
+@documents_router.get('/document/delete')
 async def delete_document():
     drop_doc_table.execute()
     return 'Документ успешно удалён'

@@ -1,8 +1,8 @@
-from src.operators.execute_request import Execute_requests
+from src.connections import get_session
 from src.models.documents_model import DocumentsModel
 
 
-class DropDocumentsTable(Execute_requests):
+class DropDocumentsTable:
     def __init__(self):
         self.document_model = DocumentsModel.__table__
 
@@ -10,5 +10,13 @@ class DropDocumentsTable(Execute_requests):
         self.document_model.drop()
 
     def execute(self):
-        return super(DropDocumentsTable, self).execute()
+        self.pg_session = get_session()
+        try:
+            self.processing()
+            self.pg_session.commit()
+        except Exception as error:
+            raise error
+        finally:
+            self.pg_session.close()
+
 
